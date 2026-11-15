@@ -1,0 +1,9 @@
+{
+  "id": "source_001",
+  "name": "茶杯狐",
+  "url": "https://cupfox.app/",
+  "type": "web",
+  "enabled": true,
+  "cloudstream_module": "CupFox",
+  "status": "directory-adapter-test"
+}
