@@ -1,0 +1,35 @@
+
+name: Build CloudStream plugin
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+
+      - name: Build .cs3 plugin
+        run: gradle :CupFox:make
+
+      - name: Upload build output
+        uses: actions/upload-artifact@v4
+        with:
+          name: CupFox-cs3
+          path: |
+            **/build/*.cs3
+            **/build/outputs/**/*.cs3
