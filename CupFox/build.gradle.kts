@@ -1,1 +1,13 @@
-// The root build.gradle.kts applies the CloudStream plugin and Android/Kotlin plugins.
+
+version = 1
+
+cloudstream {
+    description = "CupFox Chinese Movie Provider"
+    authors = listOf("CupFox")
+    status = 3
+    tvTypes = listOf(
+        "Movie",
+        "TvSeries",
+        "Anime"
+    )
+}
