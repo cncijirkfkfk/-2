@@ -1,7 +1,7 @@
 
 {
-  "name": "CupFox",
-  "description": "CupFox Chinese Movie Provider",
+  "name": "聚合影视",
+  "description": "聚合影视多网站影视入口",
   "manifestVersion": 1,
   "pluginLists": [
     "https://raw.githubusercontent.com/cncijirkfkfk/-2/builds/plugins.json"
