@@ -13,7 +13,7 @@ import org.jsoup.nodes.Element
 class CupFoxProvider : MainAPI() {
     override var mainUrl = "https://cupfox.app"
     override var name = "茶杯狐（目录测试版）"
-    override val lang = "zh"
+    override var lang = "zh"
     override val hasMainPage = true
     override val supportedTypes = setOf(
         TvType.Movie,
