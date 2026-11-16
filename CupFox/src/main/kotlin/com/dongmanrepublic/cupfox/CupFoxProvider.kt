@@ -5,16 +5,12 @@ import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.utils.ExtractorLink
 import org.jsoup.nodes.Element
 
-/**
- * First-pass CloudStream adapter for source_001 (茶杯狐).
- * This version reads same-site homepage links.
- * Search and playable video extraction are not yet implemented.
- */
 class CupFoxProvider : MainAPI() {
     override var mainUrl = "https://cupfox.app"
     override var name = "茶杯狐（目录测试版）"
     override var lang = "zh"
     override val hasMainPage = true
+
     override val supportedTypes = setOf(
         TvType.Movie,
         TvType.TvSeries,
@@ -43,15 +39,20 @@ class CupFoxProvider : MainAPI() {
         return newHomePageResponse(request.name, items)
     }
 
-    override suspend fun search(query: String): List<SearchResponse> {
-        // Search endpoint has not been verified.
+    override suspend fun search(
+        query: String
+    ): List<SearchResponse> {
         return emptyList()
     }
 
-    override suspend fun load(url: String): LoadResponse {
+    override suspend fun load(
+        url: String
+    ): LoadResponse {
         val document = app.get(fixUrl(url)).document
 
-        val title = document.selectFirst("h1")?.text()?.trim()
+        val title = document.selectFirst("h1")
+            ?.text()
+            ?.trim()
             ?.takeIf { it.isNotBlank() }
             ?: document.title().trim()
                 .takeIf { it.isNotBlank() }
@@ -70,6 +71,7 @@ class CupFoxProvider : MainAPI() {
             url
         ) {
             this.plot = description
+
             this.posterUrl =
                 document.selectFirst("meta[property=og:image]")
                     ?.attr("content")
@@ -84,7 +86,6 @@ class CupFoxProvider : MainAPI() {
         subtitleCallback: (SubtitleFile) -> Unit,
         callback: (ExtractorLink) -> Unit
     ): Boolean {
-        // No verified playable stream URL yet.
         return false
     }
 
@@ -104,7 +105,9 @@ class CupFoxProvider : MainAPI() {
         val title = text().trim()
             .replace(Regex("\\s+"), " ")
 
-        if (title.length < 4 || title.length > 90) return null
+        if (title.length < 4 || title.length > 90) {
+            return null
+        }
 
         if (title in setOf("更多", "首页", "片单", "文章")) {
             return null

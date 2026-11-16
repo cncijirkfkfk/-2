@@ -1,3 +1,4 @@
+
 pluginManagement {
     repositories {
         google()
@@ -5,5 +6,7 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
 rootProject.name = "DongmanRepublicCloudStream"
+
 include(":CupFox")
