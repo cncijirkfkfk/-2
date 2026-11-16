@@ -1,0 +1,8 @@
+{
+  "name": "CupFox",
+  "description": "CupFox Chinese Movie Provider",
+  "manifestVersion": 1,
+  "pluginLists": [
+    "https://raw.githubusercontent.com/cncijirkfkfk/-2/builds/plugins.json"
+  ]
+}

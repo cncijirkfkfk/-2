@@ -1,0 +1,22 @@
+[
+    {
+        "fileHash": "sha256-0f0b8b2ee850e4ef427028c0b052994433a90d433acde5bfb66da76b7f2415aa",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/cncijirkfkfk/-2",
+        "fileSize": 11363,
+        "status": 3,
+        "authors": [
+            "CupFox"
+        ],
+        "tvTypes": [
+            "Movie",
+            "TvSeries",
+            "Anime"
+        ],
+        "version": 4,
+        "internalName": "CupFox",
+        "description": "\u805a\u5408\u5f71\u89c6 - \u591a\u7f51\u7ad9\u5f71\u89c6\u5165\u53e3",
+        "url": "https://raw.githubusercontent.com/cncijirkfkfk/-2/builds/CupFox.cs3",
+        "name": "CupFox"
+    }
+]
