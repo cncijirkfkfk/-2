@@ -3,6 +3,8 @@ name: Build CloudStream plugin
 
 on:
   push:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -11,6 +13,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
@@ -23,13 +26,46 @@ jobs:
         with:
           gradle-version: '8.9'
 
-      - name: Build .cs3 plugin
-        run: gradle :CupFox:make
+      - name: Build plugin and generate plugins.json
+        run: gradle :CupFox:make makePluginsJson
+
+      - name: Prepare repository files
+        run: |
+          mkdir -p dist
+
+          cp build/plugins.json dist/plugins.json
+
+          cat > dist/repo.json << 'EOF'
+          {
+            "name": "CupFox",
+            "description": "CupFox Chinese Movie Provider",
+            "manifestVersion": 1,
+            "pluginLists": [
+              "https://raw.githubusercontent.com/cncijirkfkfk/-2/builds/plugins.json"
+            ]
+          }
+          EOF
+
+          find . -type f -name "*.cs3" \
+            -not -path "./.git/*" \
+            -exec cp {} dist/ \;
+
+          ls -lah dist
+
+          test -f dist/plugins.json
+          test -f dist/repo.json
+          test -n "$(find dist -maxdepth 1 -name '*.cs3' -print -quit)"
 
       - name: Upload build output
         uses: actions/upload-artifact@v4
         with:
           name: CupFox-cs3
-          path: |
-            **/build/*.cs3
-            **/build/outputs/**/*.cs3
+          path: dist/*
+
+      - name: Publish CloudStream repository
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: builds
+          publish_dir: ./dist
+          force_orphan: true
