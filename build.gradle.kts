@@ -29,13 +29,15 @@ allprojects {
 fun Project.cloudstream(
     configuration: CloudstreamExtension.() -> Unit
 ) {
-    extensions.getByName<CloudstreamExtension>("cloudstream").configuration()
+    extensions.getByName<CloudstreamExtension>("cloudstream")
+        .configuration()
 }
 
 fun Project.android(
     configuration: BaseExtension.() -> Unit
 ) {
-    extensions.getByName<BaseExtension>("android").configuration()
+    extensions.getByName<BaseExtension>("android")
+        .configuration()
 }
 
 subprojects {
@@ -71,13 +73,17 @@ subprojects {
     }
 
     dependencies {
+        val apk by configurations
         val implementation by configurations
 
-        implementation("com.github.recloudstream.cloudstream:library:-SNAPSHOT")
+        apk("com.lagradost:cloudstream3:pre-release")
+
         implementation(kotlin("stdlib"))
         implementation("com.github.Blatzar:NiceHttp:0.4.11")
         implementation("org.jsoup:jsoup:1.18.3")
-        implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.1")
+        implementation(
+            "com.fasterxml.jackson.module:jackson-module-kotlin:2.13.1"
+        )
     }
 }
 
