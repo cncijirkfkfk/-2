@@ -1,5 +1,5 @@
 
-version = 1
+version = 3
 
 cloudstream {
     description = "聚合影视 - 多网站影视入口"
